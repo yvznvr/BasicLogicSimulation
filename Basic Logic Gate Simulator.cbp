@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="../Basic Logic Gate Simulator" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="../Basic Logic Gate Simulator" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,6 +34,14 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="AndGate.cpp" />
+		<Unit filename="AndGate.h" />
+		<Unit filename="LogicComponent.cpp" />
+		<Unit filename="LogicComponent.h" />
+		<Unit filename="NotGate.cpp" />
+		<Unit filename="NotGate.h" />
+		<Unit filename="OrGate.cpp" />
+		<Unit filename="OrGate.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

@@ -1,5 +1,6 @@
 #include "OrGate.h"
-
+#include <iostream>
+using namespace std;
 OrGate::OrGate(int signal1, int signal2, string name, int nInputs, int nOutputs) : LogicComponent(name,nInputs,nOutputs)
 {
     iter = false;
@@ -36,4 +37,9 @@ void OrGate::setInputs(int signal1, int signal2)
     iter = false;
     inputList[1] = signal1;
     inputList[2] = signal2;
+}
+
+void OrGate::print()
+{
+    cout << outputList[1] << endl;
 }

@@ -11,6 +11,7 @@ class OrGate : public LogicComponent
         void iterate();
         bool isIterate();
         void setInputs(int,int);
+        void print();
     protected:
 
     private:
