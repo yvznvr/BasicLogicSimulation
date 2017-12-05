@@ -6,7 +6,7 @@
 class AndGate : public LogicComponent
 {
     public:
-        AndGate(int, int, string, int, int);
+        AndGate(string, string, string, int, int);
         virtual ~AndGate();
         void iterate();
         bool isIterate();

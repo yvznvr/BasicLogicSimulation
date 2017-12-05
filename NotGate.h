@@ -6,7 +6,7 @@
 class NotGate: public LogicComponent
 {
     public:
-        NotGate(int, string, int, int);
+        NotGate(string, string, int, int);
         virtual ~NotGate();
         void iterate();
         bool isIterate();

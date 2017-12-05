@@ -1,13 +1,13 @@
 #include <iostream>
 
-#include "include\OrGate.h"
+#include "OrGate.h"
 
 using namespace std;
 
 int main()
 {
-    OrGate o(1,1,"or1",1,1);
+    OrGate o("1","0","or1",1,1);
+    o.iterate();
     o.print();
-    cout << "Hello world!" << endl;
     return 0;
 }

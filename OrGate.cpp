@@ -1,11 +1,11 @@
 #include "OrGate.h"
 #include <iostream>
 using namespace std;
-OrGate::OrGate(int signal1, int signal2, string name, int nInputs, int nOutputs) : LogicComponent(name,nInputs,nOutputs)
+OrGate::OrGate(string signal1, string signal2, string name, int nInputs, int nOutputs) : LogicComponent(name,nInputs,nOutputs)
 {
     iter = false;
-    inputList = new string[2];
-    outputList = new string[1];
+    inputList = new string[3];
+    outputList = new string[2];
     inputList[1] = signal1;
     inputList[2] = signal2;
 }

@@ -1,6 +1,6 @@
 #include "AndGate.h"
 
-AndGate::AndGate(int signal1, int signal2, string name, int nInputs, int nOutputs) : LogicComponent(name,nInputs,nOutputs)
+AndGate::AndGate(string signal1, string signal2, string name, int nInputs, int nOutputs) : LogicComponent(name,nInputs,nOutputs)
 {
     iter = false;
     inputList = new string[2];

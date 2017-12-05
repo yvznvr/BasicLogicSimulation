@@ -6,7 +6,7 @@
 class OrGate : public LogicComponent
 {
     public:
-        OrGate(int, int, string, int, int);
+        OrGate(string, string, string, int, int);
         virtual ~OrGate();
         void iterate();
         bool isIterate();

@@ -1,6 +1,6 @@
 #include "NotGate.h"
 
-NotGate::NotGate(int signal, string name, int nInputs, int nOutputs) : LogicComponent(name, nInputs, nOutputs)
+NotGate::NotGate(string signal, string name, int nInputs, int nOutputs) : LogicComponent(name, nInputs, nOutputs)
 {
     iter = false;
     inputList = new string[1];
