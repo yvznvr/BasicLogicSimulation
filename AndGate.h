@@ -3,6 +3,7 @@
 
 #include "LogicComponent.h"
 
+
 class AndGate : public LogicComponent
 {
     public:

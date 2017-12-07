@@ -34,6 +34,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Adder.cpp" />
+		<Unit filename="Adder.h" />
 		<Unit filename="AndGate.cpp" />
 		<Unit filename="AndGate.h" />
 		<Unit filename="LogicComponent.cpp" />
