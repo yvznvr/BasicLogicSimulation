@@ -17,7 +17,7 @@ Adder::Adder(string name): LogicComponent(name, 9,5)
     iter = false;
     this->sum1 = new int[4];
     this->sum2 = new int[4];
-    this->output = new int[4];
+    this->output = new int[4]();
 }
 
 Adder::~Adder()
@@ -35,9 +35,18 @@ string Adder::getName()
 void Adder::iterate()
 {
     iter = true;
+    cout << componentName << " devresinin girisleri" << endl;
+    cout << "Sum1: " << sum1[0] << sum1[1] << sum1[2] << sum1[3] << endl;
+    cout << "Sum2: " << sum2[0] << sum2[1] << sum2[2] << sum2[3] << endl;
+    cout << "Carry: " << carry << endl;
+    cout << "Adim Adim İslemler Sonucu Cikislar ise asagidaki sekildedir." << endl;
+    cout << "Baslangicta tum cikis degerleri 0 olarak varsayilir" << endl;
+    cout << "C S4 S3 S2 S1" << endl;
     for(int i=3 ; i>=0 ; i--){
         output[i] = ((sum1[i] ^ sum2[i]) ^ carry);
         carry = ((sum1[i] & sum2[i]) | (sum1[i] & carry)) | (sum2[i] & carry);
+        cout << carry << "  " << output[0] << "  " << output[1] << "  ";
+        cout << output[2] << "  " << output[3] << endl;
     }
 }
 

@@ -32,6 +32,8 @@ void OrGate::iterate()
     }
     else
         outputList[0] = "1";
+    cout << componentName << " Elemaninin Girisleri: " << inputList[0];
+    cout << " ve " << inputList[1] << " cikisi ise " << outputList[0] << endl;
 }
 
 string OrGate::getName()

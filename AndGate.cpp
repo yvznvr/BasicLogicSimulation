@@ -36,6 +36,8 @@ void AndGate::iterate()
     }
     else
         outputList[0] = "0";
+    cout << componentName << " Elemaninin Girisleri: " << inputList[0];
+    cout << " ve " << inputList[1] << " cikisi ise " << outputList[0] << endl;
 }
 
 bool AndGate::isIterate()

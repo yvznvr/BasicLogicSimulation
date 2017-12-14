@@ -19,18 +19,21 @@ void getInputs(string, vector<string>*);
 void getComponent(string, vector<LogicComponent*>*, vector<string>*);
 void setInputs(string, vector<LogicComponent*>*, vector<string>*, vector<string>);
 string getInputFromAnotherComponent(string, vector<LogicComponent*>*);
+void printOutput(string, vector<LogicComponent*>*);
 
-int main()
+int main(int argc,char **argv)
 {
+    // Terminale yazilan herseyi out.txt dosyasina yazan komut
+    freopen("output.txt","w",stdout);
+
     string outputs;
     vector<string> Lines;
     vector<string> Inputs;
     vector<LogicComponent*> logicCircuits;
-    getLines("C:\\Users\\Yavuz\\Desktop\\BasicLogicGateSimulator\\test.txt", &Lines);
-    for (int i=0;i<Lines.size();i++)
-    {
-        cout << Lines.at(i) << endl;
-    }
+    if(argc == 1)
+        getLines("C:\\Users\\Yavuz\\Desktop\\BasicLogicGateSimulator\\test.txt", &Lines);
+    else
+        getLines(argv[1],&Lines);
 
     // Giris degerlerini aliyoruz
     getInputs(Lines.at(1), &Inputs);
@@ -38,9 +41,9 @@ int main()
     // Uzerinden tekrar gecmemiz gerekmeyen alanlari siliyoruz
     // Birinci ve ikinci satirlar
     Lines.erase(Lines.begin());Lines.erase(Lines.begin());
+
     // Cikis degerlerini bir stringe atadik
     outputs = Lines.back();
-
     for (int i=0; i<Lines.size(); i++)
     {
         if(!Lines.at(i).find("Output "))
@@ -50,6 +53,7 @@ int main()
         }
     }
 
+    // Dosya uzerinde birden fazla kez gezerek tum girisleri setledik
     for (int j=0;j<3;j++)
     {
         for (int i=0;i<Lines.size()-1;i++)
@@ -58,12 +62,31 @@ int main()
         }
     }
 
-    cout << logicCircuits.at(1)->getName() << endl;
-    logicCircuits.at(1)->print();
-
+    // Genel cikisi yazdirdik
+    printOutput(outputs,&logicCircuits);
+    // Tum devre elemanlarini sildik
     for (int i=0;i<logicCircuits.size();i++) delete logicCircuits.at(i);
 
     return 0;
+}
+
+void printOutput(string outputString, vector<LogicComponent*> *circuits)
+{
+    string temp;
+    vector<string> outputList;
+    // string'i stream turune donusturuyoruz
+    std::stringstream stream(outputString);
+    // Tum cikis isimlerini bir listeye atiyoruz
+    while (std::getline(stream,temp,' ')) outputList.push_back(temp);
+    outputList.erase(outputList.begin());
+    cout << "Devrenin Genel Cikislari: ";
+    for(int i=0; i<outputList.size();i++)
+    {
+        // Parametre olarak verilen cikis adinin degerini geri donduruyoruz
+        // ve yazdiriyoruz
+        cout << getInputFromAnotherComponent(outputList.at(i),circuits) << " ";
+    }
+    cout << endl;
 }
 
 void recognizeComponent(string cName, vector<LogicComponent*> *comp)
@@ -144,7 +167,6 @@ void getComponent(string strInputs, vector<LogicComponent*>* circuits, vector<st
 void setInputs(string compName, vector<LogicComponent*> *circuits, vector<string>* inputs, vector<string>readedinputs)
 {
     LogicComponent *comp;
-    //vector<string> copyofReadedInputs = *readedinputs;
     for(int i=0; i<circuits->size();i++)
     {
         if(compName == circuits->at(i)->getName()) comp=circuits->at(i);

@@ -35,6 +35,8 @@ void NotGate::iterate()
     else
         outputList[0] = "0";
     iter = true;
+    cout << componentName << " Elemaninin Girisi: " << inputList[0];
+    cout << " cikisi ise " << outputList[0] << endl;
 }
 
 bool NotGate::isIterate()
