@@ -1,4 +1,5 @@
 #include "Adder.h"
+#include <stdlib.h>
 
 Adder::Adder(int *sum1 ,int *sum2 , int carry, string name): LogicComponent(name, 9,5)
 {
@@ -11,6 +12,14 @@ Adder::Adder(int *sum1 ,int *sum2 , int carry, string name): LogicComponent(name
     this->sum2 = sum2;
 }
 
+Adder::Adder(string name): LogicComponent(name, 9,5)
+{
+    iter = false;
+    this->sum1 = new int[4];
+    this->sum2 = new int[4];
+    this->output = new int[4];
+}
+
 Adder::~Adder()
 {
     delete sum1;
@@ -18,6 +27,10 @@ Adder::~Adder()
     delete output;
 }
 
+string Adder::getName()
+{
+    return componentName;
+}
 
 void Adder::iterate()
 {
@@ -30,6 +43,10 @@ void Adder::iterate()
 
 void Adder::print()
 {
+    cout << "Sum1: " << sum1[0] << sum1[1] << sum1[2] << sum1[3] << endl;
+    cout << "Sum2: " << sum2[0] << sum2[1] << sum2[2] << sum2[3] << endl;
+    cout << "Carry: " << carry << endl;
+    cout << "Sonuc:" << endl;
     cout << "C S4 S3 S2 S1" << endl << carry << "  ";
     for(int i=0 ; i<4 ; i++){
         cout << output[i] << "  ";
@@ -40,4 +57,25 @@ void Adder::print()
 bool Adder::isIterate()
 {
     return iter;
+}
+
+void Adder::addInput(string input)
+{
+    if(countofAvailableInputs<4)
+        sum1[countofAvailableInputs] = atoi(input.c_str());
+    else if(countofAvailableInputs!=8)
+        sum2[countofAvailableInputs%4] = atoi(input.c_str());
+    else
+        carry = atoi(input.c_str());
+    countofAvailableInputs++;
+    if(countofAvailableInputs>=9)
+        iterate();
+}
+
+string Adder::getOutput(int address)
+{
+    if(address<4)
+        return toString(output[address]);
+    else
+        return toString(carry);
 }

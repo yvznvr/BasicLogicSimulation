@@ -9,12 +9,15 @@ using namespace std;
 class Adder: public LogicComponent
 {
     public:
+        Adder(string);
         Adder(int*,int*,int,string);
         virtual ~Adder();
         void iterate();
         bool isIterate();
         void print();
-
+        string getName();
+        void addInput(string);
+        string getOutput(int);
     protected:
 
     private:

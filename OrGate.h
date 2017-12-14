@@ -6,12 +6,16 @@
 class OrGate : public LogicComponent
 {
     public:
-        OrGate(string, string, string, int, int);
+        OrGate(string);
+        OrGate(string, string, string);
         virtual ~OrGate();
         void iterate();
         bool isIterate();
         void setInputs(int,int);
         void print();
+        string getName();
+        void addInput(string);
+        string getOutput(int);
     protected:
 
     private:

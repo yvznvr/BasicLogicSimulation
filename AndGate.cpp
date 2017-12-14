@@ -5,8 +5,15 @@ AndGate::AndGate(string signal1, string signal2, string name, int nInputs, int n
     iter = false;
     inputList = new string[2];
     outputList = new string[1];
-    inputList[1] = signal1;
-    inputList[2] = signal2;
+    inputList[0] = signal1;
+    inputList[1] = signal2;
+}
+
+AndGate::AndGate(string name): LogicComponent(name,2,1)
+{
+    iter = false;
+    inputList = new string[2];
+    outputList = new string[1];
 }
 
 AndGate::~AndGate()
@@ -15,15 +22,20 @@ AndGate::~AndGate()
     delete outputList;
 }
 
+string AndGate::getName()
+{
+    return componentName;
+}
+
 void AndGate::iterate()
 {
     iter = true;
-    if(inputList[1] == inputList[2] && inputList[1] == "1")
+    if(inputList[0] == inputList[1] && inputList[0] == "1")
     {
-        outputList[1] = "1";
+        outputList[0] = "1";
     }
     else
-        outputList[1] = "0";
+        outputList[0] = "0";
 }
 
 bool AndGate::isIterate()
@@ -34,6 +46,23 @@ bool AndGate::isIterate()
 void AndGate::setInputs(int signal1, int signal2)
 {
     iter = false;
-    inputList[1] = signal1;
-    inputList[2] = signal2;
+    inputList[0] = signal1;
+    inputList[1] = signal2;
+}
+
+void AndGate::addInput(string input)
+{
+    inputList[countofAvailableInputs] = input;
+    countofAvailableInputs++;
+    if(countofAvailableInputs>=2) iterate();
+}
+
+void AndGate::print()
+{
+
+}
+
+string AndGate::getOutput(int address)
+{
+    return outputList[address];
 }

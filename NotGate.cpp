@@ -8,20 +8,32 @@ NotGate::NotGate(string signal, string name, int nInputs, int nOutputs) : LogicC
     inputList[1] = signal;
 }
 
+NotGate::NotGate(string name):LogicComponent(name,1,1)
+{
+    iter = false;
+    inputList = new string[1];
+    outputList = new string[1];
+}
+
 NotGate::~NotGate()
 {
     delete inputList;
     delete outputList;
 }
 
+string NotGate::getName()
+{
+    return componentName;
+}
+
 void NotGate::iterate()
 {
-    if(inputList[1]=="0")
+    if(inputList[0]=="0")
     {
-        outputList[1] = "1";
+        outputList[0] = "1";
     }
     else
-        outputList[1] = "0";
+        outputList[0] = "0";
     iter = true;
 }
 
@@ -33,5 +45,22 @@ bool NotGate::isIterate()
 void NotGate::setInputs(int signal)
 {
     iter = false;
-    inputList[1] = signal;
+    inputList[0] = signal;
+}
+
+void NotGate::addInput(string input)
+{
+    inputList[countofAvailableInputs] = input;
+    countofAvailableInputs++;
+    if(countofAvailableInputs>=1) iterate();
+}
+
+void NotGate::print()
+{
+
+}
+
+string NotGate::getOutput(int address)
+{
+    return outputList[address];
 }

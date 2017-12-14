@@ -6,11 +6,16 @@
 class NotGate: public LogicComponent
 {
     public:
+        NotGate(string);
         NotGate(string, string, int, int);
         virtual ~NotGate();
         void iterate();
         bool isIterate();
         void setInputs(int);
+        string getName();
+        void addInput(string);
+        void print();
+        string getOutput(int);
 
     protected:
 

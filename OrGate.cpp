@@ -1,13 +1,20 @@
 #include "OrGate.h"
 #include <iostream>
-using namespace std;
-OrGate::OrGate(string signal1, string signal2, string name, int nInputs, int nOutputs) : LogicComponent(name,nInputs,nOutputs)
+
+OrGate::OrGate(string name) : LogicComponent(name,2,1)
 {
     iter = false;
-    inputList = new string[3];
-    outputList = new string[2];
-    inputList[1] = signal1;
-    inputList[2] = signal2;
+    inputList = new string[2];
+    outputList = new string[1];
+}
+
+OrGate::OrGate(string signal1, string signal2, string name) : LogicComponent(name,2,1)
+{
+    iter = false;
+    inputList = new string[2];
+    outputList = new string[1];
+    inputList[0] = signal1;
+    inputList[1] = signal2;
 }
 
 OrGate::~OrGate()
@@ -19,12 +26,17 @@ OrGate::~OrGate()
 void OrGate::iterate()
 {
     iter = true;
-    if(inputList[1]==inputList[2] && inputList[1]=="0")
+    if(inputList[0]==inputList[1] && inputList[0]=="0")
     {
-        outputList[1] = "0";
+        outputList[0] = "0";
     }
     else
-        outputList[1] = "1";
+        outputList[0] = "1";
+}
+
+string OrGate::getName()
+{
+    return componentName;
 }
 
 bool OrGate::isIterate()
@@ -35,11 +47,23 @@ bool OrGate::isIterate()
 void OrGate::setInputs(int signal1, int signal2)
 {
     iter = false;
-    inputList[1] = signal1;
-    inputList[2] = signal2;
+    inputList[0] = signal1;
+    inputList[1] = signal2;
 }
 
 void OrGate::print()
 {
-    cout << outputList[1] << endl;
+    std::cout << outputList[0] << endl;
+}
+
+void OrGate::addInput(string input)
+{
+    inputList[countofAvailableInputs] = input;
+    countofAvailableInputs++;
+    if(countofAvailableInputs>=2) iterate();
+}
+
+string OrGate::getOutput(int address)
+{
+    return outputList[address];
 }

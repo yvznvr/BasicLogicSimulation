@@ -184,7 +184,7 @@ void setInputs(string compName, vector<LogicComponent*> *circuits, vector<string
     cout << circuits->size() <<"---------------" << readedinputs.size()<<endl;
     //                                                         for(int i=0;i<comp->getCountofAvailableInputs();i++) readedinputs.erase(readedinputs.begin());
     //cout << "---------------" << readedinputs->size()<< comp->getName() <<endl;
-    for (int i=comp->getCountofAvailableInputs(); i<readedinputs.size();i++)
+    for (int i=0; i<readedinputs.size();i++)
     {
         cout << comp->getName() <<" okunan giris  " << readedinputs.at(i) << endl;
         if(comp->getCountofAvailableInputs()<comp->getNumberOfInputs())

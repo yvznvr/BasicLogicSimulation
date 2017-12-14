@@ -2,6 +2,8 @@
 #define LOGICCOMPONENT_H
 
 #include <string>
+#include <sstream>
+
 using namespace std;
 
 class LogicComponent
@@ -11,13 +13,20 @@ class LogicComponent
         virtual ~LogicComponent();
         virtual void print()=0;
         virtual void iterate()=0;
-
+        virtual bool isIterate()=0;
+        virtual string getName()=0;
+        virtual void addInput(string)=0;
+        int getCountofAvailableInputs();
+        virtual string getOutput(int)=0;
+        string toString(int val);
+        int getNumberOfInputs();
     protected:
         string componentName;
         int numberOfInputs;
         int numberOfOutputs;
         string *inputList;
         string *outputList;
+        int countofAvailableInputs;
     private:
 
 };
