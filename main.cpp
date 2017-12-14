@@ -22,24 +22,6 @@ string getInputFromAnotherComponent(string, vector<LogicComponent*>*);
 
 int main()
 {
-    /*
-    OrGate o("1","0","or1");
-    o.iterate();
-    o.print();
-    int s1[4] = {1,1,1,1};
-    int s2[4] = {1,0,1,0};
-    Adder a(s1,s2,0,"adder1");
-    a.iterate();
-    a.print();
-    recognizeComponent("Adder1", &logicCircuits);
-    recognizeComponent("Not3", &logicCircuits);
-    recognizeComponent("And2", &logicCircuits);
-    recognizeComponent("Or5", &logicCircuits);
-    for (int i=0;i<logicCircuits.size();i++)
-        std::cout << logicCircuits.at(i)->getName() << endl;
-    std::cout << isAdded("Adder1", &logicCircuits) << endl;
-    */
-    std::cout << "-----------------------------"<<endl;
     string outputs;
     vector<string> Lines;
     vector<string> Inputs;
@@ -49,13 +31,6 @@ int main()
     {
         cout << Lines.at(i) << endl;
     }
-    /*
-    string b;
-    vector<string> deneme;
-    std::stringstream aa(Lines.at(3));
-    while (std::getline(aa,b,' ')) deneme.push_back(b);
-    cout << "--------------" << deneme.at(2);
-    */
 
     // Giris degerlerini aliyoruz
     getInputs(Lines.at(1), &Inputs);
@@ -65,21 +40,16 @@ int main()
     Lines.erase(Lines.begin());Lines.erase(Lines.begin());
     // Cikis degerlerini bir stringe atadik
     outputs = Lines.back();
-    cout << "Outputs: " << outputs << endl;
+
     for (int i=0; i<Lines.size(); i++)
     {
         if(!Lines.at(i).find("Output "))
         {
-            cout << "Buldum... " << Lines.at(i) << endl;
             outputs = Lines.at(i);
             Lines.erase(Lines.begin()+i);
         }
     }
-    // Cikis degerini iceren satiri componentleri iceren listeden cikardik
-    //Lines.pop_back();
-    cout << Lines.at(Lines.size()-1) << endl;
-    //getComponent(Lines.at(0),&logicCircuits, &Inputs);
-    //getComponent(Lines.at(1),&logicCircuits, &Inputs);
+
     for (int j=0;j<3;j++)
     {
         for (int i=0;i<Lines.size()-1;i++)
@@ -87,16 +57,18 @@ int main()
             getComponent(Lines.at(i),&logicCircuits, &Inputs);
         }
     }
+
     cout << logicCircuits.at(1)->getName() << endl;
     logicCircuits.at(1)->print();
-    for (int i=0;i<logicCircuits.size();i++)
-    delete logicCircuits.at(i);
+
+    for (int i=0;i<logicCircuits.size();i++) delete logicCircuits.at(i);
+
     return 0;
 }
 
 void recognizeComponent(string cName, vector<LogicComponent*> *comp)
 {
-    // Lojik elemanlarýn tutuldupu havuza yeni lojik eleman ekler.
+    // Lojik elemanlarin tutuldugu havuza yeni lojik eleman ekler.
     string temp;
     temp = cName;
     cName.pop_back();
@@ -151,7 +123,7 @@ void getInputs(string strInputs, vector<string>* inputs)
     // Devrenen genel girislerini alir
     string temp;
     std::stringstream stream(strInputs);
-    while (std::getline(stream,temp,' ')) {inputs->push_back(temp);cout << "In." << temp << endl;}
+    while (std::getline(stream,temp,' ')) inputs->push_back(temp);
 }
 
 void getComponent(string strInputs, vector<LogicComponent*>* circuits, vector<string>* inputs)
@@ -166,10 +138,6 @@ void getComponent(string strInputs, vector<LogicComponent*>* circuits, vector<st
         recognizeComponent(componentName,circuits);
     // Dosyadan okunan input degerleri (I-1, Adder1-2 gibi)
     while (std::getline(stream,temp,' ')) readedInputs.push_back(temp);
-    for(int i=0; i<readedInputs.size();i++)
-    {
-        cout << i <<". eleman " << readedInputs[i] << endl;
-    }
     setInputs(componentName,circuits,inputs,readedInputs);
 }
 
@@ -181,12 +149,9 @@ void setInputs(string compName, vector<LogicComponent*> *circuits, vector<string
     {
         if(compName == circuits->at(i)->getName()) comp=circuits->at(i);
     }
-    cout << circuits->size() <<"---------------" << readedinputs.size()<<endl;
-    //                                                         for(int i=0;i<comp->getCountofAvailableInputs();i++) readedinputs.erase(readedinputs.begin());
-    //cout << "---------------" << readedinputs->size()<< comp->getName() <<endl;
+
     for (int i=comp->getCountofAvailableInputs(); i<readedinputs.size();i++)
     {
-        cout << comp->getName() <<" okunan giris  " << readedinputs.at(i) << endl;
         if(comp->getCountofAvailableInputs()<comp->getNumberOfInputs())
         {
             if(readedinputs.at(i) == "1" || readedinputs.at(i) == "0")
@@ -195,18 +160,14 @@ void setInputs(string compName, vector<LogicComponent*> *circuits, vector<string
             }
             else if(readedinputs.at(i).at(0) == 'I')
             {
-                cout << "input girisler: " << inputs->at(comp->getCountofAvailableInputs()) << endl;
                 comp->addInput(inputs->at(comp->getCountofAvailableInputs()));
             }
             else
             {
                 // Adder1-2 Or3-2 gibi cikislar setlenecek
-                std::cout << "readedinputs boyutu: " << readedinputs.size() << endl;
-                cout << "getInputFromAnotherComponent öncesi countofAvailableInputs: " << comp->getCountofAvailableInputs() <<endl;
                 string inp = getInputFromAnotherComponent(readedinputs.at(comp->getCountofAvailableInputs()),circuits);
                 if (inp=="-")
                     break;
-                cout << "eklenen giris " << inp << endl;
                 comp->addInput(inp);
             }
         }
@@ -218,11 +179,8 @@ string getInputFromAnotherComponent(string inputsName, vector<LogicComponent*>* 
     // Adder1-2, Or3-2 gibi cikislarin degerini bulur
     // deger hesaplanamiyorsa '-' dondurur
     int address = inputsName.find('-');
-    cout << endl << endl;
-    cout << inputsName.substr(address+1) << endl;
     for(int i=0;i<circuits->size();i++)
     {
-        cout << inputsName.substr(0,address) << circuits->at(i)->getName() << circuits->size() << endl;
         if(inputsName.substr(0,address)==circuits->at(i)->getName())
         {
             if(!circuits->at(i)->isIterate()) return "-";
