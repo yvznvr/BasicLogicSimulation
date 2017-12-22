@@ -27,6 +27,8 @@ class LogicComponent
         int numberOfOutputs;
         string *inputList;
         string *outputList;
+        // countofAvailableInputs degiskeni tanimlanmis olan (0 veya 1)
+        // tum girislerin sayisini verir
         int countofAvailableInputs;
     private:
 

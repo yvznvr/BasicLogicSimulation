@@ -1,0 +1,14 @@
+exe dosyasını parametresiz olarak başlatırsanız bulunduğu dizinde test.txt
+adlı dosyayı açıp sonuçları output.txt dosyasına yazar.
+Terminalden parametre ile başlatırsanız verdiğiniz parametre adresini açmaya 
+çalışır ve bulduğu devrenin sonuçlarını output.txt dosyasına yazar.
+Program terminal üzerinden sadece bir parametre alır.
+
+ProgramAdı dosyayolu, şeklinde
+
+Önemli Not:
+Programın düzgün çalışabilmesi için tüm boşluklar tek karakter olmalıdır.
+
+Örnek test dosyası test.txt adıyla proje klasöründe bulunmaktadır.
+
+Derlenmiş dosya ise /bin dizini altındadır.

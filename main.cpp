@@ -31,7 +31,7 @@ int main(int argc,char **argv)
     vector<string> Inputs;
     vector<LogicComponent*> logicCircuits;
     if(argc == 1)
-        getLines("C:\\Users\\Yavuz\\Desktop\\BasicLogicGateSimulator\\test.txt", &Lines);
+        getLines("test.txt", &Lines);
     else
         getLines(argv[1],&Lines);
 
